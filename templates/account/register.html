@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock title %}
+
+{% block body %}
+
+<div class="container py-4 mb-3">
+ <h2 class="text-center">Register</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.name.errors }}
+            <label for="id_username">{{ form.username.label_tag }}</label>
+            {{ form.username }}
+        </div>
+  <div class="form-group">
+    <label for="id_gender">{{ form.Gender.label_tag }}</label>
+    {{ form.gender }}
+  </div>
+        <div class="form-group">
+            <label for="id_address">{{ form.address.label_tag }}</label>
+            {{ form.address }}
+        </div>
+        <div class="form-group">
+    <label for="id_city">{{ form.city.label_tag }}</label>
+   {{ form.city }}
+  </div>
+        <div class="form-group">
+    <label for="id_state">{{ form.state.label_tag }}</label>
+   {{ form.state }}
+  </div>
+        <div class="form-group">
+    <label for="id_email">{{ form.email.label_tag }}</label>
+   {{ form.email }}
+  </div>
+  <div class="form-group">
+    <label for="id_contact_number">{{ form.contact_number.label_tag }}</label>
+   {{ form.contact_number }}
+  </div>
+        <div class="form-group">
+    <label for="id_password">{{ form.password.label_tag }}</label>
+   {{ form.password }}
+  </div>
+        <div class="form-group">
+    <label for="id_password2">{{ form.password2.label_tag }}</label>
+   {{ form.password2 }}
+  </div>
+
+        <button  class="btn btn-primary" type="submit" value="submit">Submit</button>
+</form>
+
+{% endblock body %}
