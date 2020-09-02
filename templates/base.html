@@ -63,6 +63,8 @@
               Welcome {{request.user}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'account:profile' %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'account:changepassword' %}">Change Password</a>
               <a class="dropdown-item" href="{% url 'account:logout' %}">Log Out</a>
             </div>
           </li>
