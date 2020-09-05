@@ -30,6 +30,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'account:register' %}">Register</a>
               <a class="dropdown-item" href="{% url 'account:login' %}">Login</a>
+                <a class="dropdown-item" href="{% url 'account:passwordreset' %}">Reset Password</a>
             </div>
           </li>
           <li class="nav-item">
@@ -63,7 +64,8 @@
               Welcome {{request.user}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'account:profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'account:edit_profile' user.pk %}">Edit Profile</a>
+                <a class="dropdown-item" href="{% url 'account:profile' user.pk %}">Profile</a>
                 <a class="dropdown-item" href="{% url 'account:changepassword' %}">Change Password</a>
               <a class="dropdown-item" href="{% url 'account:logout' %}">Log Out</a>
             </div>
