@@ -83,4 +83,49 @@ class CustomLoginForm(AuthenticationForm):
         )
 
 
+class EditProfileForm(forms.ModelForm):
+    address = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control", "placeholder": "address"}))
+    class Meta:
+        model = CustomUser
+        fields = ["username", "gender", "Address", "city", "state", "email", "contact_number"]
+
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update(
+            {
+                'class': "form-control",
+                'placeholder': "Enter Your Name",
+            }
+        )
+        self.fields['gender'].widget.attrs.update(
+            {
+                'class': "form-control",
+                'placeholder': "Enter Your Gender",
+            }
+        )
+        self.fields['city'].widget.attrs.update(
+            {
+                'class': "form-control",
+                'placeholder': "Enter Your city",
+            }
+        )
+        self.fields['state'].widget.attrs.update(
+            {
+                'class': "form-control",
+                'placeholder': "Enter Your state",
+            }
+        )
+        self.fields['email'].widget.attrs.update(
+            {
+                'class': "form-control",
+                'placeholder': "Enter Your email'id",
+            }
+        )
+        self.fields['contact_number'].widget.attrs.update(
+            {
+                'class': "form-control",
+                'placeholder': "Enter Your Contact number",
+            }
+        )
+
 

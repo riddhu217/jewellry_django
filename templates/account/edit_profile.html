@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-
-{% block title %}Register{% endblock title %}
+{% block title %}Edit_Profile{% endblock title %}
 
 {% block body %}
 
 <div class="container py-4 mb-3">
- <h2 class="text-center">Register</h2>
+ <h2 class="text-center">Edit Profile</h2>
     <form method="post">
 
         {% csrf_token %}
@@ -38,16 +37,9 @@
     <label for="id_contact_number">{{ form.contact_number.label_tag }}</label>
    {{ form.contact_number }}
   </div>
-        <div class="form-group">
-    <label for="id_password">{{ form.password.label_tag }}</label>
-   {{ form.password }}
-  </div>
-        <div class="form-group">
-    <label for="id_password2">{{ form.password2.label_tag }}</label>
-   {{ form.password2 }}
-  </div>
 
-        <button  class="btn btn-primary" type="submit" value="submit">Submit</button>
+
+        <button  class="btn btn-primary" type="submit" value="submit">Update Detail</button>
 </form>
 
 {% endblock body %}
