@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>{% block title %}{% endblock title %} | Jewelley shop</title>
+      {% block css %}{% endblock css%}
   </head>
   <body>
 
@@ -23,6 +24,7 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
+             {% if not user.is_authenticated %}
              <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="account/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Account
@@ -32,21 +34,24 @@
               <a class="dropdown-item" href="{% url 'account:login' %}">Login</a>
                 <a class="dropdown-item" href="{% url 'account:passwordreset' %}">Reset Password</a>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About Us</a>
-          </li>
-          <li class="nav-item dropdown">
+             </li>
+            {% endif %}
+                 <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/collection" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Collection
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/collection">Ring</a>
-              <a class="dropdown-item" href="#">Earrings</a>
-              <a class="dropdown-item" href="#">Neckless</a>
+              <a class="dropdown-item" href="{% url 'product:ring' %}">Ring</a>
+              <a class="dropdown-item" href="{% url 'product:earrings' %}">Earrings</a>
+              <a class="dropdown-item" href="{% url 'product:neckless' %}">Neckless</a>
                <a class="dropdown-item" href="#">Bracelets</a>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About Us</a>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact Us</a>
           </li>
@@ -63,6 +68,7 @@
             <a class="nav-link dropdown-toggle" href="/collection" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Welcome {{request.user}}
             </a>
+
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'account:edit_profile' user.pk %}">Edit Profile</a>
                 <a class="dropdown-item" href="{% url 'account:profile' user.pk %}">Profile</a>

@@ -85,6 +85,7 @@ class CustomLoginForm(AuthenticationForm):
 
 class EditProfileForm(forms.ModelForm):
     address = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control", "placeholder": "address"}))
+
     class Meta:
         model = CustomUser
         fields = ["username", "gender", "Address", "city", "state", "email", "contact_number"]
@@ -127,5 +128,3 @@ class EditProfileForm(forms.ModelForm):
                 'placeholder': "Enter Your Contact number",
             }
         )
-
-

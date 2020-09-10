@@ -21,7 +21,7 @@ def collection(request):
 class Contactview(CreateView):
     form_class = ContactForm
     template_name = 'contact.html'
-    success_url = reverse_lazy('contact')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.save()
