@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from mainapp.forms import ContactForm
 from django.urls import reverse_lazy
-
+from django.core.mail import send_mail
 
 # Create your views here.
 

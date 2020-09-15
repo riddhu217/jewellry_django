@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Product EarringsDetail{% endblock title %}
+{% block title %}Product BraceletDetail{% endblock title %}
 {% block css %}
 
 
@@ -180,7 +180,6 @@ img {
 
 
 
-
 </style>
 {% endblock css%}
 {% block body %}
@@ -216,76 +215,46 @@ img {
                             </a>
                         </div>
 
-                    </div>{% for product in p_name %}
+                    </div>
                     <div class="details col-md-6">
                         <h3 class="product-title"><a href="#">{{ product.p_name }}</a></h3>
                         <div class="desc">{{ product.p_desc }}</div>
-                            <div class="rating">
-                                <div class="stars">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>{% endfor %}
-                                <span class="review-no">41 reviews</span>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
                             </div>
-                            <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
-                                cubilia
-                                sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-                            <h4 class="price">current price: {{ product.p_price }}</h4>
-                            <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87
-                                votes)</strong>
-                            </p>
-                            <h5 class="sizes">sizes:
-                                <span class="size" data-toggle="tooltip" title="small">s</span>
-                                <span class="size" data-toggle="tooltip" title="medium">m</span>
-                                <span class="size" data-toggle="tooltip" title="large">l</span>
-                                <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-                            </h5>
-                            <!--<h5 class="colors">colors:
-                                <span class="color orange not-available" data-toggle="tooltip"
-                                      title="Not In store"></span>
-                                <span class="color green"></span>
-                                <span class="color blue"></span>
-                            </h5>-->
-                            <div class="action">
-                                <button  class="add-to-cart btn btn-default" type="button">add to cart</button>
-                                <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span>
-                                </button>
-                            </div>
+                            <span class="review-no">41 reviews</span>
+                        </div>
+                        <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
+                            cubilia
+                            sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
+                        <h4 class="price">current price:{{ product.p_price }}</h4>
+                        <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong>
+                        </p>
+                        <h5 class="sizes">sizes:
+                            <span class="size" data-toggle="tooltip" title="small">s</span>
+                            <span class="size" data-toggle="tooltip" title="medium">m</span>
+                            <span class="size" data-toggle="tooltip" title="large">l</span>
+                            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+                        </h5><!--
+                        <h5 class="colors">colors:
+                            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+                            <span class="color green"></span>
+                            <span class="color blue"></span>
+                        </h5>-->
+                        <div class="action">
+                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
     {% endblock body %}
-
-
-{% block js %}
-<script>
-$( document ).ready(function() {
-    console.log( "ready!" );
-    $('.add_2_cart').click(function () {
-      console.log( "Click!" );
-      var id = this.getAttribute("data-id");
-      console.log(id);
-      let data = new FormData();
-      data.append('product_id',id);
-      fetch('{% url 'product:add_cart' %}', {
-          method: 'POST',
-          body: data,
-          headers:{
-                "X-CSRFToken": '{{ csrf_token }}'
-            },
-        })
-        .then(function(response) {
-        response.json().then(function(data) {
-        console.log(data.result);
-      });
-        })
-    });
-});
-
-</script>
-{% endblock js %}

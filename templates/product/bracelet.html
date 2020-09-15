@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Product Neckless{% endblock title %}
+{% block title %}Product Bracelet{% endblock title %}
 
 {% block body %}
    <!-- Required meta tags -->
@@ -97,19 +97,18 @@
                     </div>
                 </div>
                 <ul class="social">
-                    <li><a href="{% url 'product:neckless_detail' product.id %}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                    <li><a href="{% url 'product:bracelet_detail' product.id %}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                     <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                    <li><a  class="add_2_cart" href="" data-id="{{ product.id }}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a class="add_2_cart" href="" data-id="{{ product.id }}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
         </div>
         {% endfor %}
-
     </div>
 </div>
 <hr>
 {% endblock body %}
-{% block js %}
+    {% block js %}
 <script>
 $( document ).ready(function() {
     console.log( "ready!" );

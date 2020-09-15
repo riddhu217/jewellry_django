@@ -56,7 +56,7 @@ class OrderItem(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
 

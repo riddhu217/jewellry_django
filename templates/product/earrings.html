@@ -9,7 +9,6 @@
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -100,32 +99,40 @@
                 <ul class="social">
                     <li><a href="{% url 'product:earrings_detail' product.id %}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                     <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                    <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    <li><a  class="add_2_cart" href=""  data-id="{{ product.id }}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
         </div>
         {% endfor %}
-
-
-
-
-
     </div>
 </div>
 <hr>
- <style>
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: skyblue;
-  color: white;
-  text-align: center;
-}
-</style>
 
-<div class="footer" >
-  <p>@ CopyRight By Jewellery Shop</p>
-</div>
+
 {% endblock body %}
+{% block js %}
+<script>
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $('.add_2_cart').click(function () {
+      console.log( "Click!" );
+      var id = this.getAttribute("data-id");
+      console.log(id);
+      let data = new FormData();
+      data.append('product_id',id);
+      fetch('{% url 'product:add_cart' %}', {
+          method: 'POST',
+          body: data,
+          headers:{
+                "X-CSRFToken": '{{ csrf_token }}'
+            },
+        })
+        .then(function(response) {
+        response.json().then(function(data) {
+        console.log(data.result);
+      });
+        })
+    });
+});
+</script>
+    {% endblock js %}

@@ -23,6 +23,12 @@ class ProductImageInLine(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInLine, ]
+    list_display = ('p_name', 'category_id','p_price','stock')
+    search_fields = ('p_name', 'category_id')
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
 
 
 admin.site.register(Product, ProductAdmin)
