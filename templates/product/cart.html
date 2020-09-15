@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Cart{% endblock title %}
+
+{% block body %}
+<br>
+<h2 align="center">MY SHOPPING CART </h2>
+<br>
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Prdoct name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">#</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart.cartitem_set.all %}
+        <tr>
+            <th ><img height="70" width="70" src="{{ item.product.productimage_set.first.image.url }}"></th>
+            <td>{{item.product.p_name}}</td>
+            <td>{{item.product.p_price}}</td>
+            <td>{{item.quantity}}</td>
+            <td>
+                <a class="btn btn-danger" href="{% url 'product:cart_delete' item.id %}">Delete</a>
+            </td>
+        </tr>
+         <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td><h3><strong>$31.53</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                        </button></td>
+                        <td>
+                        <button type="button" class="btn btn-success">
+                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        </button></td>
+                    </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

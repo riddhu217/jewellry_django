@@ -137,13 +137,13 @@ STATICFILES_DIRS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = '123ridhz@gmail.com'
+EMAIL_HOST_PASSWORD = 'clmkpewuimmukckj'
 EMAIL_PORT = 587
 
 #if DEBUG:
- #   EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-  #  EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+ #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ #EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 # media Ulr Config
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
