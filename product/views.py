@@ -108,5 +108,8 @@ class CartDetailView(DetailView):
     model = CartItem
 
 
-class OrderTotal():
-    model = Order
+#class CartItemView(View):
+   # model = CartItem
+  #  Cart.objects.filter(product=Product).exists()
+
+
