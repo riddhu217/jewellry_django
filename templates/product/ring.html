@@ -82,7 +82,6 @@
     <div class="row">
 
         {% for product in products %}
-
         <!-- product 1 -->
         <div class="col-md-3 col-sm-6">
             <div class="product-grid6">
@@ -102,7 +101,7 @@
                     <li><a href="{% url 'product:ring_detail' product.id %}" data-tip="Quick View"><i
                             class="fa fa-search"></i></a></li>
                     <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                    <li><a class="add_2_cart" href="#"  data-id="{{ product.id }}" data-tip="Add to Cart"><i
+                    <li><a class="add_2_cart" href=""  data-id="{{ product.id }}" data-tip="Add to Cart"><i
                             class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>

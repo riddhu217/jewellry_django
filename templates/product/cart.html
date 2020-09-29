@@ -3,9 +3,88 @@
 {% block title %}Product Cart{% endblock title %}
 
 {% block body %}
+<style>* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 15px 0;
+}
+
+.num-block {
+	float: left;
+	width: 100%;
+  padding: 15px 30px;
+}
+
+/* skin 1 */
+.skin-1 .num-in {
+	float: left;
+	width: 94px;}
+
+.skin-1 .num-in span {
+	display: block;
+	float: left;
+	width: 30px;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	position: relative;
+	cursor: pointer;
+}
+
+.skin-1 .num-in span.dis:before {
+  background-color: #ccc !important;
+}
+
+.skin-1 .num-in input {
+	float: left;
+	width: 32px;
+	height: 32px;
+	border: 1px solid #6E6F7A;
+	border-radius: 5px;
+	color: #000;
+	text-align: center;
+	padding: 0;
+}
+
+.skin-1 .num-in span.minus:before {
+	content: '';
+	position: absolute;
+	width: 15px;
+	height: 2px;
+	background-color: #00A94F;
+	top: 50%;
+	left: 0;
+}
+
+.skin-1 .num-in span.plus:before, .skin-1 .num-in span.plus:after {
+	content: '';
+	position: absolute;
+	right: 0px;
+	width: 15px;
+	height: 2px;
+	background-color: #00A94F;
+	top: 50%;
+}
+
+.skin-1 .num-in span.plus:after {
+	-webkit-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+
+</style>
 <br>
 <h2 align="center">MY SHOPPING CART </h2>
 <br>
+
 <div class="container">
     <table class="table">
         <thead>
@@ -20,37 +99,53 @@
         </thead>
         <tbody>
         {% for item in cart.cartitem_set.all %}
+
+        <!--order.total = order.product.all().aggregate(Sum('p.price_for_each_item'))-->
         <tr>
-            <th ><img height="70" width="70" src="{{ item.product.productimage_set.first.image.url }}"></th>
+            <th><img height="70" width="70" src="{{ item.product.productimage_set.first.image.url }}"></th>
             <td>{{item.product.p_name}}</td>
             <td>{{item.product.p_price}}</td>
-            <td>{{item.quantity}}</td>
+            <!--<td>{{item.quantity}}</td>-->
+
+            <td>
+                <div class="float">
+                    <div class="float-left"><input type="number" value="1" aria-label="Search"
+                                                   class="form-control" style="width: 100px"></div>
+            </td>
+            </td>
             <td>
                 <a class="btn btn-danger" href="{% url 'product:cart_delete' item.id %}">Delete</a>
             </td>
         </tr>
-             <!--<tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>Total</h3></td>
-                        <td><h3><strong>$31.53</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                        </button></td>
-                        <td>
-                        <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
-                    </tr>-->
-
+        {% empty %}
+        <h5>Sorry, Your Cart is Empty!!</h5>
         {% endfor %}
+
+
+        <tr>
+            <td colspan="3">
+            <td><h5>Estimated shipping</h5></td>
+            <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+        </tr>
+        <tr>
+
+            <td colspan="3">
+            <td><h3>Total</h3></td>
+            <td class="text-right"><h3><strong>{{ item.order.product.total }}</strong></h3></td>
+        </tr>
+        <tr>
+
+             <td colspan="3">
+            <td>
+                <a href="{% url 'product:ring' %}" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                </a></td>
+            <td>
+                <a href="{% url 'product:checkout' %}" type="button" class="btn btn-success">
+                    Checkout <span class="glyphicon glyphicon-play"></span>
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

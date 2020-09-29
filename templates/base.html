@@ -10,14 +10,13 @@
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>{% block title %}{% endblock title %} | Jewelley shop</title>
-    {% block css %}{% endblock css%}
 
 </head>
 <body>
 
 <!--nav bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Jewellary Shop</a>
+    <a class="navbar-brand" href="/">jewellery shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,21 +26,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-
-           <!--
-           <li class="nav-item">
-           <a class="nav-link" href="{% url 'account:login' %}">Login</a>
-         </li>
-            <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="account/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             Account
-           </a>
-           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-               <a class="dropdown-item" href="{% url 'account:register' %}">Register</a>
-             <a class="dropdown-item" href="{% url 'account:login' %}">Login</a>
-               <a class="dropdown-item" href="{% url 'account:passwordreset' %}">Reset Password</a>
-           </div>
-            </li>-->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/collection" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,7 +58,7 @@
                 <a href="{% url 'account:login' %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</a>
             </form>
             {% endif %}
-                        <!--cart Button-->
+            <!--cart Button-->
             <form class="my-3 mx-2  my-lg-0">
                 <a href="{% url 'product:cart'  %}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Cart</a>
             </form>
@@ -140,6 +124,10 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 {% block js %} {% endblock js %}
+{%  block tfoot %} <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="#">Jewellery shop</a>
+  </div>{% endblock tfoot %}
+
 </body>
 
 </html>

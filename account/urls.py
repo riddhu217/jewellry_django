@@ -13,9 +13,6 @@ urlpatterns = (
     path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name="profile"),
     path('edit_profile/<int:pk>/', views.EditProfileView.as_view(), name="edit_profile"),
 
-#ProfileView
-    # path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name="profile"),
-
 # Chanag password
     path('changepassword/',auth_views.PasswordChangeView.as_view( template_name = 'account/changepassword.html',
         success_url = '/'

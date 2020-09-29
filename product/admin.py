@@ -3,14 +3,9 @@ from .models import Product, ProductImage, Category, Brand, Order, OrderItem, Ca
 
 # Register your models here.
 
-
-admin.site.register(CartItem)
-admin.site.register(Category)
 admin.site.register(Brand)
-admin.site.register(Order)
+admin.site.register(Category)
 admin.site.register(OrderItem)
-admin.site.register(Cart)
-admin.site.register(FeedBack)
 
 
 class ProductImageInLine(admin.TabularInline):
@@ -21,14 +16,36 @@ class ProductImageInLine(admin.TabularInline):
     verbose_name_plural = 'ProductImage'
 
 
-class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductImageInLine, ]
-    list_display = ('p_name', 'category_id','p_price','stock')
-    search_fields = ('p_name', 'category_id')
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user','status','total')
+    search_fields = ('status','total')
 
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
 
 
-admin.site.register(Product, ProductAdmin)
+admin.site.register(Order, OrderAdmin)
+
+
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('cart','product','quantity')
+    search_fields = ('status','total')
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+
+
+admin.site.register(CartItem, CartItemAdmin)
+
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('name', 'city', 'contact_no','feedback')
+    search_fields = ('name', 'city')
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+
+
+admin.site.register(FeedBack, FeedbackAdmin)
