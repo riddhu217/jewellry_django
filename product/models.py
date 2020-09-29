@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 from account.models import CustomUser
 
-
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
 

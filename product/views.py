@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, View, TemplateView
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
+from product.forms import FeedBackForm
 
 
 # Create your views here.
@@ -73,14 +74,26 @@ class AddToCartView(View):
 
     def post(self, request, *args, **kwargs):
         product_id = request.POST.get('product_id', None)
+
         if product_id:
             cart, _ = Cart.objects.get_or_create(user=request.user)
             if cart:
-                obj = CartItem.objects.create(cart=cart, product_id=product_id)
-                if obj:
-                    result = 'success'
+                if not CartItem.objects.filter(cart=cart, product_id=product_id).exists():
+                    obj = CartItem.objects.create(cart=cart, product_id=product_id)
+                    if cart_item.quantity < cart_item.product.stock:
+                        cart_item.quantity += 1
+                    cart_item.save()
+                    if obj:
+                        result = 'success'
+                    else:
+                        result = 'not success'
                 else:
-                    result = 'not success'
+                    result = 'Item is Exists'
+            else:
+                result = 'Cart not Exists '
+        else:
+            result = 'Product not Exists'
+
         return JsonResponse({'result': result})
 
 
@@ -108,8 +121,30 @@ class CartDetailView(DetailView):
     model = CartItem
 
 
-#class CartItemView(View):
-   # model = CartItem
-  #  Cart.objects.filter(product=Product).exists()
+class CartOrderView(ListView):
+    model = Order
+    template_name = 'product/cart.html'
 
+    def get_queryset(self):
+        #queryset = ItemPrice.objects.filter(cartitem)
+        #queryset = queryset.annotate(total=Sum('p_price'))
+        #return queryset
+        return super(CartOrderView, self).get_queryset().annotate(
+            total=Coalesce(sum('p_price'), 0)
+        ).order_by('cartitem')
+      
+
+class CheckOutView(ListView):
+    model = Order
+    template_name = 'product/checkout.html'
+
+
+#class FeedBackView(ListView):
+ #   form_class = FeedBackForm
+  #  template_name = 'product/feedback.html'
+   # success_url = reverse_lazy('product:cart')
+#
+ #   def form_valid(self, form):
+  #      form.save()
+   #     return super().form_valid(form)
 
