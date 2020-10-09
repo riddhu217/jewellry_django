@@ -5,6 +5,10 @@ from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from product.forms import FeedBackForm
+from django.views.generic import CreateView
+from django.conf import settings
+from decimal import Decimal
+from paypal.standard.forms import PayPalPaymentsForm
 
 
 # Create your views here.
@@ -104,8 +108,13 @@ class CartTemplateView(TemplateView):
     def get_context_data(self):
         context = super(CartTemplateView, self).get_context_data()
         user_obj = self.request.user
-        context['cart'] = Cart.objects.get(user=user_obj)
 
+        cart = Cart.objects.get(user=user_obj)
+        context['cart'] = cart
+        total = 00
+        for item in cart.cartitem_set.all():
+            total = total + item.product.p_price
+        context['total'] = total
         return context
 
 
@@ -125,26 +134,22 @@ class CartOrderView(ListView):
     model = Order
     template_name = 'product/cart.html'
 
-    def get_queryset(self):
-        #queryset = ItemPrice.objects.filter(cartitem)
-        #queryset = queryset.annotate(total=Sum('p_price'))
-        #return queryset
-        return super(CartOrderView, self).get_queryset().annotate(
-            total=Coalesce(sum('p_price'), 0)
-        ).order_by('cartitem')
-      
 
 class CheckOutView(ListView):
     model = Order
     template_name = 'product/checkout.html'
 
 
-#class FeedBackView(ListView):
- #   form_class = FeedBackForm
-  #  template_name = 'product/feedback.html'
-   # success_url = reverse_lazy('product:cart')
-#
- #   def form_valid(self, form):
-  #      form.save()
-   #     return super().form_valid(form)
 
+def PaymentProcess(request):
+    return render(request,'product/paypalprocess.html')
+
+
+class FeedBackView(CreateView):
+    form_class = FeedBackForm
+    template_name = 'product/feedback.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

@@ -14,7 +14,9 @@
     State :{{ customuser.state}}<br>
     Contact Number :{{ customuser.contact_number}}<br>
 
+
+<a href="{% url 'account:edit_profile' user.pk %}" type="button" class="btn btn-success">
+            Edit Profile <span class="glyphicon glyphicon-play"></span></a>
 </div>
-{% include "product/purchases.html" %}
 </form>
 {% endblock body %}

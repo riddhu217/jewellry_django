@@ -5,7 +5,19 @@ from .models import Product, ProductImage, Category, Brand, Order, OrderItem, Ca
 
 admin.site.register(Brand)
 admin.site.register(Category)
-admin.site.register(OrderItem)
+
+
+class OrderItemAdmin(admin.ModelAdmin):
+    model = OrderItem
+    list_display = ('Order', 'product', 'quantity')
+    search_fields = ('quantity', 'product')
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+
+
+admin.site.register(OrderItem, OrderItemAdmin)
 
 
 class ProductImageInLine(admin.TabularInline):
@@ -14,6 +26,20 @@ class ProductImageInLine(admin.TabularInline):
     extra = 1
     classes = ['collapse']
     verbose_name_plural = 'ProductImage'
+
+
+class ProductAdmin(admin.ModelAdmin):
+    model = Product
+    list_display = ('p_name', 'p_price', 'category_id','stock')
+    search_fields = ('p_name', 'p_price')
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+    inlines = [ProductImageInLine,]
+
+
+admin.site.register(Product,ProductAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -38,6 +64,7 @@ class CartItemAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CartItem, CartItemAdmin)
+
 
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = ('name', 'city', 'contact_no','feedback')

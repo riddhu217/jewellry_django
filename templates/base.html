@@ -73,7 +73,6 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'account:edit_profile' user.pk %}">Edit Profile</a>
                         <a class="dropdown-item" href="{% url 'account:profile' user.pk %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'account:changepassword' %}">Change Password</a>
                         <a class="dropdown-item" href="{% url 'account:logout' %}">Log Out</a>
