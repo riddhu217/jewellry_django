@@ -2,9 +2,8 @@ from django import forms
 from product.models import FeedBack
 
 
-
 class FeedBackForm(forms.ModelForm):
-    feedback = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control","placeholder":"tell me about contact me",}))
+    feedback = forms.CharField(widget=forms.Textarea(attrs={'class': "form-control", "placeholder":"Please Enter Your FeedBack...",}))
 
     class Meta:
         model = FeedBack

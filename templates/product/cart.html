@@ -131,7 +131,7 @@ body {
 
             <td colspan="3">
             <td><h3>Total</h3></td>
-            <td class="text-right"><h3><strong>{{ item.order.product.total }}</strong></h3></td>
+            <td class="text-right"><h3><strong>{{total}}</strong></h3></td>
         </tr>
         <tr>
 
@@ -141,7 +141,7 @@ body {
                     <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                 </a></td>
             <td>
-                <a href="{% url 'product:checkout' %}" type="button" class="btn btn-success">
+                <a href="{% url 'product:paypalprocess' %}" type="button" class="btn btn-success">
                     Checkout <span class="glyphicon glyphicon-play"></span>
                 </a>
             </td>

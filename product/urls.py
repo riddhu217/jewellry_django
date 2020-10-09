@@ -17,7 +17,10 @@ urlpatterns = (
     path('cart-detail/',views.CartDetailView.as_view(), name="cart_detail"),
     path('cart-delete/<int:pk>', views.CartDeleteView.as_view(), name="cart_delete"),
     path('checkout/', views.CheckOutView.as_view(), name="checkout"),
-    #path('feedback/', views.FeedbackView.as_view(), name="feedback"),
+    path('feedback/<int:pk>', views.FeedBackView.as_view(), name="feedback"),
+
+    #payment
+    path('paypalprocess/', views.PaymentProcess, name='paypalprocess'),
 
 
 )

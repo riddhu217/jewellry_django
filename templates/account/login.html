@@ -3,20 +3,23 @@
 {% block title %}login{% endblock title %}
 
 {% block body %}
-
-
-<div class="container py-4 mb-3">
+<style>p {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+</style>
+<p class="p">
+<div class="container " >
     <h2 class="text-center">Login</h2>
     <form method="post">
         {% csrf_token %}
-
-        <div class="form-group">
+        <div class="form-group  w-25 p-1"  >
             {{ form.name.errors }}
-            <label for="id_username">{{ form.username.label_tag }}</label>
+            <label for="id_username" >{{ form.username.label_tag }}</label>
             {{ form.username }}
         </div>
 
-        <div class="form-group">
+        <div class="form-group w-25 p-1">
 
             <label for="id_password">{{ form.password.label_tag }}</label>
             {{ form.password}}
@@ -34,5 +37,5 @@
         <a href="{% url 'account:passwordreset' %}">Forgot your password?</a>
     </div>
 </div>
-
+</p>
 {% endblock  %}
