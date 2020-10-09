@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}login{% endblock title %}
+
+{% block body %}
+<style>p {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+</style>
+<p class="p">
+<div class="container " >
+    <h2 class="text-center">Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group  w-25 p-1"  >
+            {{ form.name.errors }}
+            <label for="id_username" >{{ form.username.label_tag }}</label>
+            {{ form.username }}
+        </div>
+
+        <div class="form-group w-25 p-1">
+
+            <label for="id_password">{{ form.password.label_tag }}</label>
+            {{ form.password}}
+
+        </div>
+        <button class="btn btn-primary" type="submit" value="submit">Login</button>
+
+    </form>
+</div>
+
+    <div class="d-flex justify-content-center links">
+        Don't have an account?<a href="{% url 'account:register' %}"> Sign Up</a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'account:passwordreset' %}">Forgot your password?</a>
+    </div>
+</div>
+</p>
+{% endblock  %}

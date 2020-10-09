@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Checkout{% endblock title %}
+
+{% block body %}<br>
+<div class="container" >
+    <h4 align="center">FeedBack</h4>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.name.errors }}
+            <label for="id_name">{{ form.name.label_tag }}</label>
+            {{ form.name }}
+        </div>
+  <div class="form-group">
+    <label for="id_city">{{ form.city.label_tag }}</label>
+    {{ form.city }}
+  </div>
+  <div class="form-group">
+    <label for="id_contact_no">{{ form.contact_no.label_tag }}</label>
+   {{ form.contact_no }}
+  </div>
+    <div class="form-group">
+    <label for="id_feedback">{{ form.feedback.label_tag }}</label>
+    {{ form.feedback }}
+  </div>
+        <button  class="btn btn-primary" type="submit" value="submit">Submit</button>
+</form>
+
+
+
+</div>
+{% endblock body %}

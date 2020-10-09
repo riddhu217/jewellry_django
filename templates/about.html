@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock title %}
+
+{% block body %} <!-- About us -->
+
+<!--<div class="container-fluid px-0 mb-3">
+    <img src="https://source.unsplash.com/1200x400/?about,shop" class="d-block w-100 mx-0" alt="...">
+</div>-->
+<div class="container py-5 mb-5">
+    <h3 class="text-center">About Us</h3>
+    <div class="about-section">
+        <div class="container">
+            <div class="site-title text-center">
+
+                <p>‘The Sparkle sister jewellery shop’ is one of the chief precious stone adornments producers. Serving
+                    more than 5000 clients crosswise over USA, UK, Latin America, Australia and Canada.
+                    By owning all parts of store network, including precious stone sourcing, cutting, combination and
+                    gems fabricating. ‘The Sparkle sister jewellery shop’ is resolved to give the most ideal incentive
+                    to Jewelers all through the world.</p>
+            </div>
+            <br><a href="https://www.linkpicture.com/view.php?img=LPic5f648f2dbf719640956973"><img src="https://www.linkpicture.com/q/logo_3.jpeg" type="image" align="right"></a>
+
+            <div class="about-inner-section">
+                <div class="col-md-6 about-inner-column">
+                    <h4>Vision</h4>
+                    <p>To Serve the Customers with excellent Jewellery offering and services that imbeds
+                    <ul>
+                        <li><a>Trust.</a></li>
+                        <li><a>Purity</a></li>
+                        <li><a>Quality</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 about-inner-column">
+                    <h4>Mission</h4>
+                    <p>TDriving growth with immense business values by unleashing the opportunities and people
+                        potential.
+
+                        Commitment to create the finest establishing Jewelleries.</p>
+                </div>
+
+                <!-- Card -Deck -->
+                <!-- About us -->
+                <div class="card-deck mb-4 py-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">About Us</h5>
+                            <li class="list-unstyled">
+                                <a href="/contact">Contact us</a>
+                            </li>
+                            <li class="list-unstyled">
+                                <a href="#">Map Site</a>
+                            </li>
+                        </div>
+                        <!--<div class="card-footer"></div>-->
+                    </div><!-- Information -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Information</h5>
+                            <li class="list-unstyled">
+                                <a href="#">Advance Search </a>
+                            </li>
+                            <li class="list-unstyled">
+                                <a href="#">Shop By Brand</a>
+                            </li>
+                        </div>
+                        <!--<div class="card-footer"></div>-->
+                    </div><!-- account -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Account</h5>
+                            <li class="list-unstyled">
+                                <a href="#">Order History</a>
+                            </li>
+                            <li class="list-unstyled">
+                                <a href="{% url 'account:login' %}">Sign in</a>
+                            </li>
+                            <li class="list-unstyled">
+                                <a href="#">Cart Page</a>
+                            </li>
+                        </div>
+
+                        <!--<div class="card-footer"></div>-->
+                        {% endblock body %}
+
+
