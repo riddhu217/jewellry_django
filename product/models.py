@@ -68,5 +68,5 @@ class CartItem(models.Model):
 class FeedBack(models.Model):
     name = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
-    contact_no = models.IntegerField()
+    contact_no = models.CharField(max_length=20, null=True, blank=True)
     feedback = models.TextField()
