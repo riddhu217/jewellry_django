@@ -2,33 +2,41 @@
 
 {% block title %}Product Checkout{% endblock title %}
 
-{% block body %}<br>
-<div class="container" >
+{% block body %}
+<style type="text/css">
+.center {
+  margin: auto;
+  width: 50%;
+  border: 1px solid black;
+  padding: 10px;
+}
+</style>
+<br>
+<div class="container">
     <h4 align="center">FeedBack</h4>
-
     <form method="post">
         {% csrf_token %}
-
-        <div class="form-group">
+<div class="center">
+    <div class="form-group w-100 p-1">
             {{ form.name.errors }}
             <label for="id_name">{{ form.name.label_tag }}</label>
             {{ form.name }}
         </div>
-  <div class="form-group">
-    <label for="id_city">{{ form.city.label_tag }}</label>
-    {{ form.city }}
-  </div>
-  <div class="form-group">
-    <label for="id_contact_no">{{ form.contact_no.label_tag }}</label>
-   {{ form.contact_no }}
-  </div>
-    <div class="form-group">
-    <label for="id_feedback">{{ form.feedback.label_tag }}</label>
-    {{ form.feedback }}
-  </div>
-        <button  class="btn btn-primary" type="submit" value="submit">Submit</button>
-</form>
-
+        <div class="form-group w-100 p-1">
+            <label for="id_city">{{ form.city.label_tag }}</label>
+            {{ form.city }}
+        </div>
+        <div class="form-group w-100 p-1">
+            <label for="id_contact_no">{{ form.contact_no.label_tag }}</label>
+            {{ form.contact_no }}
+        </div>
+        <div class="form-group w-100 p-1">
+            <label for="id_feedback">{{ form.feedback.label_tag }}</label>
+            {{ form.feedback }}
+        </div>
+        <button class="btn btn-primary" type="submit" value="submit">Submit</button>
+</div>
+    </form>
 
 
 </div>

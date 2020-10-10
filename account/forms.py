@@ -43,7 +43,7 @@ class RegistrationForm(forms.ModelForm):
         self.fields['email'].widget.attrs.update(
             {
                 'class': "form-control",
-                'placeholder': "Enter Your email'id",
+                'placeholder': "Enter Your email i'd",
             }
         )
         self.fields['contact_number'].widget.attrs.update(
@@ -57,8 +57,9 @@ class RegistrationForm(forms.ModelForm):
         cleaned_data = super(RegistrationForm, self).clean()
         password = self.cleaned_data['password']
         password2 = self.cleaned_data['password2']
-        if password == password2:
-            return cleaned_data
+        if password != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return self.cleaned_data
 
     def save(self, commit=True):
         instance = super(RegistrationForm, self).save(commit=False)
