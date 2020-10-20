@@ -21,6 +21,9 @@ urlpatterns = (
 
     #payment
     path('paypalprocess/', views.PaymentProcess, name='paypalprocess'),
-
-
+    path('stripe', views.StripeView.as_view(), name='stripe'),
+    path('config/', views.stripe_config),
+    path('create-checkout-session/', views.create_checkout_session),
+    path('success/', views.SuccessView.as_view()),
+    path('cancelled/', views.CancelledView.as_view()),
 )
