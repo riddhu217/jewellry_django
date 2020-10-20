@@ -132,8 +132,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # added manually
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,  "static"),
+    os.path.join(BASE_DIR,  'static'),
 ]
+#STATICFILES_DIRS = Path(BASE_DIR).joinpath('static')]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
@@ -151,9 +152,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # paypal setting Receiver Email
-PAYPAL_RECEIVER_EMAIL = 'youremail@mail.com'
+#PAYPAL_RECEIVER_EMAIL = 'sb-apcgz3360790@business.example.com'
 
-PAYPAL_TEST = True
-
-
-
+#PAYPAL_TEST = True
+STRIPE_PUBLISHABLE_KEY = ''
+STRIPE_SECRET_KEY = ''
