@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Bill{% endblock title %}
+{% load static %}
+{% block body %}
+
+<style type="text/css">
+.center {
+  margin: auto;
+  width: 50%;
+  border: 1px solid black;
+  padding: 10px;
+}
+</style>
+<br>
+<div class="container">
+    <h4 align="center">Shipiing Detail</h4>
+    <form method="post">
+        {% csrf_token %}
+<div class="center">
+    <div class="form-group w-100 p-1">
+            {{ form.name.errors }}
+            <label for="id_fname">{{ form.fname.label_tag }}</label>
+            {{ form.fname }}
+        </div>
+
+    <div class="form-group w-100 p-1">
+                      <label for="id_lname">{{ form.lname.label_tag }}</label>
+            {{ form.lname }}
+        </div>
+
+    <div class="form-group w-100 p-1">
+            <label for="id_Address">{{ form.Address.label_tag }}</label>
+            {{ form.Address }}
+        </div>
+        <div class="form-group w-100 p-1">
+            <label for="id_city">{{ form.city.label_tag }}</label>
+            {{ form.city }}
+        </div>
+         <div class="form-group w-100 p-1">
+            <label for="id_state">{{ form.state.label_tag }}</label>
+            {{ form.city }}
+        </div>
+        <div class="form-group w-100 p-1">
+            <label for="id_contact_no">{{ form.contact_no.label_tag }}</label>
+            {{ form.contact_no }}
+        </div>
+        <div class="form-group w-100 p-1">
+            <label for="id_email">{{ form.email.label_tag }}</label>
+            {{ form.email }}
+        </div>
+        <button class="btn btn-primary" type="submit" value="submit">Submit</button>
+        <a href="{% url 'product:cart'%}" class="btn btn-primary" type="submit" value="submit">Back To Cart</a>
+
+</div>
+    </form>
+
+
+</div>
+{% endblock body %}
+

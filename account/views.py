@@ -33,4 +33,4 @@ class EditProfileView(UpdateView):
     model = CustomUser
     form_class = EditProfileForm
     template_name = 'account/edit_profile.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('account/profile.html')

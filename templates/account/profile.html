@@ -5,14 +5,15 @@
 
 <form>
  <div class="container"  >
-    <h1 >Profile</h1>
-    Username:{{ customuser }}<br>
-    Email i'd :{{ customuser.email}}<br>
-    Gender : {{ customuser.gender}}<br>
-    Address : {{ customuser.address}}<br>
-    City : {{ customuser.city}}<br>
-    State :{{ customuser.state}}<br>
-    Contact Number :{{ customuser.contact_number}}<br>
+    <h1>Profile</h1>
+
+     <b> Username :</b>{{ customuser }}<br>
+     <b>Email i'd :</b>{{ customuser.email}}<br>
+     <b>Gender : </b>{{ customuser.gender}}<br>
+     <b>Address :</b> {{ customuser.address}}<br>
+     <b>City :</b> {{ customuser.city}}<br>
+     <b>State :</b>{{ customuser.state}}<br>
+     <b>Contact Number :</b>{{ customuser.contact_number}}<br>
 
 
 <a href="{% url 'account:edit_profile' user.pk %}" type="button" class="btn btn-success">
