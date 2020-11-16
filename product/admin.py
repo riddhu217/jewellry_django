@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductImage, Category, Brand, Order, OrderItem, Cart, CartItem, FeedBack
+from .models import Product, ProductImage, Category, Brand, Order, OrderItem, Cart, CartItem, FeedBack, BillingAddress
 
 # Register your models here.
 
@@ -76,3 +76,15 @@ class FeedbackAdmin(admin.ModelAdmin):
 
 
 admin.site.register(FeedBack, FeedbackAdmin)
+
+
+class BillingAddressAdmin(admin.ModelAdmin):
+    list_display = ('fname','lname','Address', 'city', 'contact_no','zip')
+    search_fields = ('fname', 'city')
+
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+
+
+admin.site.register(BillingAddress, BillingAddressAdmin)

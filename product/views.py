@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from product.models import Product, Category, Cart, CartItem, Order
 from django.views.generic import ListView, DetailView, View, TemplateView
-from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
-from product.forms import FeedBackForm
+from product.forms import FeedBackForm, BillingAddressForm
 from django.views.generic import CreateView
 import stripe
 from django.conf import settings
 from django.http.response import JsonResponse, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+import csv
+from django.utils.encoding import smart_str
+from django.views.decorators.csrf import csrf_exempt # new
+
 
 # Create your views here.
 
@@ -140,8 +142,8 @@ class CheckOutView(ListView):
     template_name = 'product/checkout.html'
 
 
-def PaymentProcess(request):
-    return render(request,'product/paypalprocess.html')
+#def PaymentProcess(request):
+ #   return render(request, 'product/paypalprocess.html')
 
 
 class FeedBackView(CreateView):
@@ -164,7 +166,6 @@ def stripe_config(request):
         stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config, safe=False)
 
-
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
@@ -175,20 +176,12 @@ def create_checkout_session(request):
             # Other optional params include:
             # [billing_address_collection] - to display billing address details on the page
             # [customer] - if you have an existing Stripe Customer ID
-            # [payment_intent_data] - lets capture the payment later
-            # [customer_email] - lets you prefill the email input in the form
-            # For full details see https:#stripe.com/docs/api/checkout/sessions/create
+            # [payment_intent_data] - capture the payment later
+            # [customer_email] - prefill the email input in the form
+            # For full details see https://stripe.com/docs/api/checkout/sessions/create
 
             # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-
-            # If we want to identify the user when using webhooks we can pass client_reference_id  to checkout
-            # session constructor. We will then be able to fetch it and make changes to our Django models.
-            #
-            # If we offer a SaaS service it would also be good to allow only authenticated users to purchase
-            # anything on our site.
-
             checkout_session = stripe.checkout.Session.create(
-                # client_reference_id=request.user.id if request.user.is_authenticated else None,
                 success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=domain_url + 'cancelled/',
                 payment_method_types=['card'],
@@ -199,32 +192,12 @@ def create_checkout_session(request):
                         'quantity': 1,
                         'currency': 'INR',
                         'amount': '2000',
-                    }
+                        }
                 ]
             )
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
-
-
-def handle_checkout_session(session):
-    # client_reference_id = user's id
-    client_reference_id = session.get("client_reference_id")
-    payment_intent = session.get("payment_intent")
-
-    if client_reference_id is None:
-        # Customer wasn't logged in when purchasing
-        return
-
-    # Customer was logged in we can now fetch the Django user and make changes to our models
-    try:
-        user = User.objects.get(id=client_reference_id)
-        print(user.username, "just purchased something.")
-
-        # TODO: make changes to our models.
-
-    except User.DoesNotExist:
-        pass
 
 
 class SuccessView(TemplateView):
@@ -233,3 +206,57 @@ class SuccessView(TemplateView):
 
 class CancelledView(TemplateView):
     template_name = 'product/cancelled.html'
+
+
+class BillingAddressView(CreateView):
+    form_class = BillingAddressForm
+    template_name = 'product/bill.html'
+    success_url = reverse_lazy('product:ordersummary')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class OrderSummaryView(View):
+    model = Order
+    template_name = 'product/ordersummary.html'
+
+    def get(self, *args, **kwargs):
+        try:
+             order = Order.objects.get(user=user.request,Ordered=False)
+             context = {
+                 'objects' : order
+             }
+             return render(self.request, 'ordersummary.html', context)
+        except ObjectDoesNotExist:
+            message.warring(self.request, "you do not have an active order")
+            return redirect("/")
+
+
+def download_csv_data(request):
+    response = HttpResponse(content_type='text/csv')
+    # decide the file name
+    response['Content-Disposition'] = 'attachment; filename="User.csv"'
+
+
+    writer = csv.writer(response, csv.excel)
+    response.write(u'\ufeff'.encode('utf8'))
+
+# write the headers
+    writer.writerow([
+        smart_str(u"user name"),
+        smart_str(u"email"),
+        smart_str(u"gender"),
+        smart_str(u"address"),
+    ])
+# get data from database or from text file....
+    user = user_services.get_CustomUser_by_login(login)  # dummy function to fetch data
+    for CustomUser in user:
+        writer.writerow([
+            smart_str(CustomUser.name),
+            smart_str(CustomUser.email),
+            smart_str(CustomUser.gender),
+            smart_str(CustomUser.address),
+        ])
+    return response

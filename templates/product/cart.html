@@ -141,9 +141,11 @@ body {
                     <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                 </a></td>
             <td>
-                <a href="{% url 'product:stripe' %}" type="button" class="btn btn-success">
+                <a href="{% url 'product:bill'  %}" type="button" class="btn btn-success">
                     Checkout <span class="glyphicon glyphicon-play"></span>
-                </a>
+               <!-- <a href="{% url 'product:feedback' user.pk%}" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> FeedBack
+                </a>-->
             </td>
         </tr>
         </tbody>
