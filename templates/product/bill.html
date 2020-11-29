@@ -41,6 +41,11 @@
             <label for="id_state">{{ form.state.label_tag }}</label>
             {{ form.city }}
         </div>
+
+        <div class="form-group w-100 p-1">
+            <label for="id_zip">{{ form.zip.label_tag }}</label>
+            {{ form.zip }}
+        </div>
         <div class="form-group w-100 p-1">
             <label for="id_contact_no">{{ form.contact_no.label_tag }}</label>
             {{ form.contact_no }}
@@ -49,8 +54,8 @@
             <label for="id_email">{{ form.email.label_tag }}</label>
             {{ form.email }}
         </div>
-        <button class="btn btn-primary" type="submit" value="submit">Submit</button>
-        <a href="{% url 'product:cart'%}" class="btn btn-primary" type="submit" value="submit">Back To Cart</a>
+        <a href="{% url 'product:ordersummary' user.pk%}" class="btn btn-primary" type="submit" value="submit">Confirm Order</a>
+     &nbsp;&nbsp;   <a href="{% url 'product:cart'%}" class="btn btn-primary" type="submit" value="submit">Back To Cart</a>
 
 </div>
     </form>

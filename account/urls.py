@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
-
+#from RegisterView.Views import CsvFileView
 app_name = 'account'
 urlpatterns = (
 
@@ -12,7 +12,9 @@ urlpatterns = (
     path('logout/', LogoutView.as_view(), name="logout"),
     path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name="profile"),
     path('edit_profile/<int:pk>/', views.EditProfileView.as_view(), name="edit_profile"),
-
+    path('csv/',views.getfile),
+    path('csv_download', views.CSVFileView.as_view(),name='csv_download'),
+    #path('pdf/',views.getpdf),
 # Chanag password
     path('changepassword/',auth_views.PasswordChangeView.as_view( template_name = 'account/changepassword.html',
         success_url = '/'

@@ -18,14 +18,14 @@ urlpatterns = (
     path('cart-delete/<int:pk>', views.CartDeleteView.as_view(), name="cart_delete"),
     path('checkout/', views.CheckOutView.as_view(), name="checkout"),
     path('feedback/<int:pk>', views.FeedBackView.as_view(), name="feedback"),
-
+    path('csv/', views.getfile),
     #payment
 #    path('paypalprocess/', views.PaymentProcess, name='paypalprocess'),
-    path('stripe/', views.StripeView.as_view(), name='stripe'),
-    path('config/', views.stripe_config),
-    path('create-checkout-session/', views.create_checkout_session),
+    #path('stripe/', views.StripeView.as_view(), name='stripe'),
+#    path('config/', views.stripe_config),
+    #path('create-checkout-session/', views.create_checkout_session),
     path('success/', views.SuccessView.as_view(), name='success'),
     path('cancelled/', views.CancelledView.as_view(), name='cancelled'),
     path('bill/', views.BillingAddressView.as_view(), name='bill'),
-    path('ordersummary/', views.OrderSummaryView.as_view(), name='ordersummary'),
+    path('ordersummary/<int:pk>', views.OrderSummaryView.as_view(), name='ordersummary'),
 )

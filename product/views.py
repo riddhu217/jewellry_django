@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from product.models import Product, Category, Cart, CartItem, Order
+from product.models import Product, Category, Cart, CartItem, Order, OrderItem
 from django.views.generic import ListView, DetailView, View, TemplateView
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from product.forms import FeedBackForm, BillingAddressForm
 from django.views.generic import CreateView
 import stripe
-from django.conf import settings
 from django.http.response import JsonResponse, HttpResponse
 import csv
-from django.utils.encoding import smart_str
+from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt # new
 
 
@@ -142,10 +142,6 @@ class CheckOutView(ListView):
     template_name = 'product/checkout.html'
 
 
-#def PaymentProcess(request):
- #   return render(request, 'product/paypalprocess.html')
-
-
 class FeedBackView(CreateView):
     form_class = FeedBackForm
     template_name = 'product/feedback.html'
@@ -154,50 +150,6 @@ class FeedBackView(CreateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-
-
-class StripeView(TemplateView):
-    template_name = 'product/stripe.html'
-
-
-@csrf_exempt
-def stripe_config(request):
-    if request.method == 'GET':
-        stripe_config = {'publicKey': settings.STRIPE_PUBLISHABLE_KEY}
-        return JsonResponse(stripe_config, safe=False)
-
-@csrf_exempt
-def create_checkout_session(request):
-    if request.method == 'GET':
-        domain_url = 'http://localhost:8000/'
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        try:
-            # Create new Checkout Session for the order
-            # Other optional params include:
-            # [billing_address_collection] - to display billing address details on the page
-            # [customer] - if you have an existing Stripe Customer ID
-            # [payment_intent_data] - capture the payment later
-            # [customer_email] - prefill the email input in the form
-            # For full details see https://stripe.com/docs/api/checkout/sessions/create
-
-            # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-            checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancelled/',
-                payment_method_types=['card'],
-                mode='payment',
-                line_items=[
-                    {
-                        'name': 'ring',
-                        'quantity': 1,
-                        'currency': 'INR',
-                        'amount': '2000',
-                        }
-                ]
-            )
-            return JsonResponse({'sessionId': checkout_session['id']})
-        except Exception as e:
-            return JsonResponse({'error': str(e)})
 
 
 class SuccessView(TemplateView):
@@ -218,45 +170,34 @@ class BillingAddressView(CreateView):
         return super().form_valid(form)
 
 
-class OrderSummaryView(View):
+class OrderSummaryView(DetailView):
     model = Order
     template_name = 'product/ordersummary.html'
 
     def get(self, *args, **kwargs):
+        user_obj = self.request.user
         try:
-             order = Order.objects.get(user=user.request,Ordered=False)
-             context = {
-                 'objects' : order
+
+            order = Order.objects.filter(user=user_obj)
+            context = {
+                'objects': order
              }
-             return render(self.request, 'ordersummary.html', context)
+            return render(self.request, 'product/ordersummary.html', context)
         except ObjectDoesNotExist:
             message.warring(self.request, "you do not have an active order")
-            return redirect("/")
+        return redirect("/")
 
 
-def download_csv_data(request):
+def getfile(request):
     response = HttpResponse(content_type='text/csv')
-    # decide the file name
-    response['Content-Disposition'] = 'attachment; filename="User.csv"'
-
-
-    writer = csv.writer(response, csv.excel)
-    response.write(u'\ufeff'.encode('utf8'))
-
-# write the headers
-    writer.writerow([
-        smart_str(u"user name"),
-        smart_str(u"email"),
-        smart_str(u"gender"),
-        smart_str(u"address"),
-    ])
-# get data from database or from text file....
-    user = user_services.get_CustomUser_by_login(login)  # dummy function to fetch data
-    for CustomUser in user:
-        writer.writerow([
-            smart_str(CustomUser.name),
-            smart_str(CustomUser.email),
-            smart_str(CustomUser.gender),
-            smart_str(CustomUser.address),
-        ])
+    response['Content-Disposition'] = 'attachment; filename="product.csv"'
+    products = Product.objects.all()
+    writer = csv.writer(response)
+    for product in products:
+        writer.writerow([product.p_name, product.category_id, product.brand_id,product.stock,product.p_desc , product.p_price,product.discount])
+        writer.writerow([])
     return response
+
+
+
+

@@ -4,6 +4,8 @@ from account.models import CustomUser
 
 
 # Register your models here.
+
+
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'contact_number', 'date_joined', 'last_login', 'is_admin', 'is_staff')
     search_fields = ('email', 'username')
