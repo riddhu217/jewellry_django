@@ -1,14 +1,16 @@
 from django.shortcuts import render
-from product.models import Product, Category, Cart, CartItem, Order
+from product.models import Product, Category, Cart, CartItem, Order, OrderItem
 from django.views.generic import ListView, DetailView, View, TemplateView
-from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
-from product.forms import FeedBackForm
+from product.forms import FeedBackForm, BillingAddressForm
 from django.views.generic import CreateView
-from django.conf import settings
-from decimal import Decimal
-from paypal.standard.forms import PayPalPaymentsForm
+import stripe
+from django.http.response import JsonResponse, HttpResponse
+import csv
+from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt # new
 
 
 # Create your views here.
@@ -140,11 +142,6 @@ class CheckOutView(ListView):
     template_name = 'product/checkout.html'
 
 
-
-def PaymentProcess(request):
-    return render(request,'product/paypalprocess.html')
-
-
 class FeedBackView(CreateView):
     form_class = FeedBackForm
     template_name = 'product/feedback.html'
@@ -153,3 +150,54 @@ class FeedBackView(CreateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+class SuccessView(TemplateView):
+    template_name = 'product/success.html'
+
+
+class CancelledView(TemplateView):
+    template_name = 'product/cancelled.html'
+
+
+class BillingAddressView(CreateView):
+    form_class = BillingAddressForm
+    template_name = 'product/bill.html'
+    success_url = reverse_lazy('product:ordersummary')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class OrderSummaryView(DetailView):
+    model = Order
+    template_name = 'product/ordersummary.html'
+
+    def get(self, *args, **kwargs):
+        user_obj = self.request.user
+        try:
+
+            order = Order.objects.filter(user=user_obj)
+            context = {
+                'objects': order
+             }
+            return render(self.request, 'product/ordersummary.html', context)
+        except ObjectDoesNotExist:
+            message.warring(self.request, "you do not have an active order")
+        return redirect("/")
+
+
+def getfile(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="product.csv"'
+    products = Product.objects.all()
+    writer = csv.writer(response)
+    for product in products:
+        writer.writerow([product.p_name, product.category_id, product.brand_id,product.stock,product.p_desc , product.p_price,product.discount])
+        writer.writerow([])
+    return response
+
+
+
+

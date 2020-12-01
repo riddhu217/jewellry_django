@@ -123,10 +123,10 @@ body {
 
 
         <tr>
-            <td colspan="3">
+            <!--<td colspan="3">
             <td><h5>Estimated shipping</h5></td>
             <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-        </tr>
+        --></tr>
         <tr>
 
             <td colspan="3">
@@ -141,9 +141,11 @@ body {
                     <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                 </a></td>
             <td>
-                <a href="{% url 'product:paypalprocess' %}" type="button" class="btn btn-success">
+                <a href="{% url 'product:bill'  %}" type="button" class="btn btn-success">
                     Checkout <span class="glyphicon glyphicon-play"></span>
-                </a>
+               <!-- <a href="{% url 'product:feedback' user.pk%}" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> FeedBack
+                </a>-->
             </td>
         </tr>
         </tbody>

@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 from account.models import CustomUser
 
+
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
 
@@ -68,5 +69,16 @@ class CartItem(models.Model):
 class FeedBack(models.Model):
     name = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
-    contact_no = models.IntegerField()
+    contact_no = models.CharField(max_length=20, null=True, blank=True)
     feedback = models.TextField()
+
+
+class BillingAddress(models.Model):
+    fname = models.CharField(max_length=20,null=True, blank=True)
+    lname = models.CharField(max_length=20,null=True, blank=True)
+    Address = models.TextField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=20,null=True, blank=True)
+    zip = models.CharField(max_length=7,null=True, blank=True)
+    state = models.CharField(max_length=20,null=True, blank=True)
+    contact_no = models.CharField(max_length=20, null=True, blank=True)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True)

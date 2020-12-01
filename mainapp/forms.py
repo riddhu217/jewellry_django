@@ -29,3 +29,20 @@ class ContactForm(forms.ModelForm):
                 'placeholder': "Enter Your Contact Number",
             }
         )
+
+def csv_que_up(request):
+    e_path = 'G:/projects/feedback/'
+    l1,l2 = request.POST['csv'].split('/')
+    csv_file = e_path+l1
+    data = open(csv_file,'r')
+    lst1 = []
+    iterdata = iter(data)
+    next(iterdata)
+    for i in iterdata:
+        i,j = i.split('\n')
+        lst = [i for i in i.split(',')]
+        lst1.append(lst)
+    for i in lst1:
+        que = FeedBack.objects.create(que_id=i[0],que=i[1])
+        que.save()
+    return True

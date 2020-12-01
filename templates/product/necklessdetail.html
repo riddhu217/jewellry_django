@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Product NecklessDetail{% endblock title %}
+{% block title %}Product EarringsDetail{% endblock title %}
 {% block css %}
 
 
@@ -12,9 +12,6 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 <style>
-
-/*****************globals*************/
-body {
   font-family: 'open sans';
   overflow-x: hidden; }
 
@@ -178,17 +175,19 @@ img {
 
 /*# sourceMappingURL=style.css.map */
 
-
-
 </style>
 {% endblock css%}
 {% block body %}
-<!-- Required meta tags -->
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
 
 
 <div class="container">
     <div class="card">
-        <div class="container-fliud">
+        <div class="container-fliud"><br><br>
+            <br><br><br><br>
             <div class="wrapper row">
                 <div class="preview col-md-6">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -229,10 +228,10 @@ img {
                             </div>
                             <span class="review-no">41 reviews</span>
                         </div>
-                        <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
-                            cubilia
-                            sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-                        <h4 class="price">current price: {{ product.p_price }}</h4>
+                        <!-- <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
+                             cubilia
+                             sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
+                         --><h4 class="price">current price: {{ product.p_price }}</h4>
                         <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong>
                         </p><!--
                         <h5 class="sizes">sizes:
@@ -247,8 +246,8 @@ img {
                             <span class="color blue"></span>
                         </h5>-->
                         <div class="action">
-                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span>
+                            <a href="{% url 'product:neckless'  %}" type="button" class="btn btn-success"> Back To Page <span class="glyphicon glyphicon-play"></span></a>
+<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span>
                             </button>
                         </div>
                     </div>

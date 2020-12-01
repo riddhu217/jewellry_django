@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Product OrderSummary{% endblock title %}
+<style type="text/css">
+.center {
+  margin: auto;
+  width: 50%;
+  border: 1px solid black;
+  padding: 10px;
+}
+</style>
+{% block body %}
+
+<h3 align="center">Order Summary</h3>
+<div class="card text-center">
+    <div class="card-body">
+
+     <p>Order Date:{{ order.order_date }}</p>
+     <p>Product name:{{ order.user }}</p>
+        <p>Total:{{ order.total }}</p>
+
+        <a href="{% url 'product:success'%}" class="btn btn-primary">PlaceOrder</a>
+        <a href="{% url 'product:cancelled'%}" class="btn btn-primary">Cancle</a>
+         <div class="d-flex justify-content-center links">
+                Give Your FeedBack!!!<a href="{% url 'product:feedback' user.pk %}"> FeedBack</a>
+            </div>
+
+  </div>
+
+</div>
+{% endblock body %}

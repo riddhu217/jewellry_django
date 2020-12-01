@@ -2,9 +2,8 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from account.forms import RegistrationForm, CustomLoginForm, EditProfileForm
 from django.contrib.auth.views import LoginView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, View
 from django.views.generic.edit import UpdateView
-
 # Create your views here.
 from account.models import CustomUser
 
@@ -33,4 +32,6 @@ class EditProfileView(UpdateView):
     model = CustomUser
     form_class = EditProfileForm
     template_name = 'account/edit_profile.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('account/profile.html')
+
+

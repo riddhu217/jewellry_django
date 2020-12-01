@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
-
+#from RegisterView.Views import CsvFileView
 app_name = 'account'
 urlpatterns = (
 

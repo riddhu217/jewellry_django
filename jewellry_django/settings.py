@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'account',
     'mainapp',
     'product',
-    'paypal.standard.ipn',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -132,16 +131,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # added manually
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,  "static"),
+    os.path.join(BASE_DIR,  'static'),
 ]
+#STATICFILES_DIRS = Path(BASE_DIR).joinpath('static')]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '123ridhz@gmail.com'
-EMAIL_HOST_PASSWORD = 'clmkpewuimmukckj'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
-
 #if DEBUG:
  #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
  #EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
@@ -150,10 +149,7 @@ EMAIL_PORT = 587
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# paypal setting Receiver Email
-PAYPAL_RECEIVER_EMAIL = 'youremail@mail.com'
 
-PAYPAL_TEST = True
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51HZY9lHSeKXPQMIwcah8IpWhfazBhUXdgOxaI7f5Yv26jF1ArL8pa953UP0t46qx9Eg7yuWZArwPqpgkuhg5TowI00Xs81wu0j'
 
-
-
+STRIPE_SECRET_KEY = 'sk_test_51HZY9lHSeKXPQMIwRfcaa2K3u4Hw8WEYF2bTg3pLR893LGsh1zLHX4fT59iDs7TYUfFi7o15ohA4QbP6snZEZVjs00mJGGbJmY'
