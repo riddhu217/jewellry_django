@@ -15,9 +15,9 @@
 <div class="card text-center">
     <div class="card-body">
 
-     <p>Order Date:{{ Order.order_date }}</p>
+     <p>Order Date:{{ order.order_date }}</p>
      <p>Product name:{{ order.user }}</p>
-        <p>Total:{{ Order.total }}</p>
+        <p>Total:{{ order.total }}</p>
 
         <a href="{% url 'product:success'%}" class="btn btn-primary">PlaceOrder</a>
         <a href="{% url 'product:cancelled'%}" class="btn btn-primary">Cancle</a>

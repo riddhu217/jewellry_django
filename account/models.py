@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager, User
 from .managers import CustomUserManager
-from django.contrib import admin
+
 
 class CustomUser(AbstractUser):
     MALE = 'male'
