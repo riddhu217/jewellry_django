@@ -20,10 +20,6 @@ urlpatterns = (
     path('feedback/<int:pk>', views.FeedBackView.as_view(), name="feedback"),
     path('csv/', views.getfile),
     #payment
-#    path('paypalprocess/', views.PaymentProcess, name='paypalprocess'),
-    #path('stripe/', views.StripeView.as_view(), name='stripe'),
-#    path('config/', views.stripe_config),
-    #path('create-checkout-session/', views.create_checkout_session),
     path('success/', views.SuccessView.as_view(), name='success'),
     path('cancelled/', views.CancelledView.as_view(), name='cancelled'),
     path('bill/', views.BillingAddressView.as_view(), name='bill'),
