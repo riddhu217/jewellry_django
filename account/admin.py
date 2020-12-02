@@ -32,6 +32,7 @@ def export_csv(modeladmin, request, queryset):
     return response
 
 
+
 class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email', 'contact_number', 'date_joined', 'last_login', 'is_admin', 'is_staff')
     search_fields = ('email', 'username')

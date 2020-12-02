@@ -188,15 +188,6 @@ class OrderSummaryView(DetailView):
         return redirect("/")
 
 
-def getfile(request):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="product.csv"'
-    products = Product.objects.all()
-    writer = csv.writer(response)
-    for product in products:
-        writer.writerow([product.p_name, product.category_id, product.brand_id,product.stock,product.p_desc , product.p_price,product.discount])
-        writer.writerow([])
-    return response
 
 
 

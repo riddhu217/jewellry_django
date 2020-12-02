@@ -18,7 +18,6 @@ urlpatterns = (
     path('cart-delete/<int:pk>', views.CartDeleteView.as_view(), name="cart_delete"),
     path('checkout/', views.CheckOutView.as_view(), name="checkout"),
     path('feedback/<int:pk>', views.FeedBackView.as_view(), name="feedback"),
-    path('csv/', views.getfile),
     #payment
     path('success/', views.SuccessView.as_view(), name='success'),
     path('cancelled/', views.CancelledView.as_view(), name='cancelled'),
